@@ -12,7 +12,7 @@ jobs:
       - run: yarn install
       - run: yarn build
       - persist_to_workspace:
-          root: /tmp/workspace
+          root: ./
           paths:
             - build
   deploy:
@@ -20,13 +20,11 @@ jobs:
       - image: circleci/python
     steps:
       - attach_workspace:
-          at: /tmp/workspace
+          at: ./
       - aws-cli/install
       - aws-cli/configure:
           aws-region: eu-west-2
-      - run:
-          name: Deploy
-          command: aws s3 sync /tmp/workspace/build s3://options.igu.io
+      - run: aws s3 sync ./build s3://options.igu.io
 
 workflows:
   version: 2
