@@ -9,6 +9,7 @@ jobs:
       - image: circleci/node
     steps:
       - checkout
+      - run: yarn install
       - run: yarn build
       - persist_to_workspace:
           root: /tmp/workspace
