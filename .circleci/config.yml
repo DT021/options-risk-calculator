@@ -25,7 +25,7 @@ jobs:
           aws-region: eu-west-2
       - run:
           name: Deploy
-          command: aws s3 sync build s3://options.igu.io
+          command: aws s3 sync /tmp/workspace/build s3://options.igu.io
 
 workflows:
   version: 2
