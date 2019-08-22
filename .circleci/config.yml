@@ -1,0 +1,41 @@
+version: 2.1
+
+orbs:
+  aws-cli: circleci/aws-cli@0.1.1
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node
+    steps:
+      - checkout
+      - run: yarn build
+      - persist_to_workspace:
+          root: /tmp/workspace
+          paths:
+            - build
+  deploy:
+    docker:
+      - image: circleci/python
+    steps:
+      - attach_workspace:
+          at: /tmp/workspace
+      - aws-cli/install
+      - aws-cli/configure:
+          aws-region: eu-west-2
+      - run:
+          name: Deploy
+          command: aws s3 sync build s3://options.igu.io
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - deploy:
+          context: igu-io-production
+          filters:
+            branches:
+              only: master
+          requires:
+            - build
