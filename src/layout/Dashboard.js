@@ -10,27 +10,12 @@ import Typography from '@material-ui/core/Typography'
 import Divider from '@material-ui/core/Divider'
 import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
-import Link from '@material-ui/core/Link'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import NotificationsIcon from '@material-ui/icons/Notifications'
-import { mainListItems, secondaryListItems } from './listItems'
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'. Built with '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Material-UI.
-      </Link>
-    </Typography>
-  )
-}
+import { mainListItems } from './listItems'
+import Box from '@material-ui/core/Box'
+import Copyright from './Copyright'
 
 const drawerWidth = 240
 
@@ -128,7 +113,7 @@ export default function Dashboard({children}) {
             <MenuIcon/>
           </IconButton>
           <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
+            Option Risk Calculator
           </Typography>
           <IconButton color="inherit">
             <Badge badgeContent={4} color="secondary">
@@ -151,13 +136,13 @@ export default function Dashboard({children}) {
         </div>
         <Divider/>
         <List>{mainListItems}</List>
-        <Divider/>
-        <List>{secondaryListItems}</List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer}/>
         {children}
-        <Copyright/>
+        <Box mb={2}>
+          <Copyright/>
+        </Box>
       </main>
     </div>
   )
