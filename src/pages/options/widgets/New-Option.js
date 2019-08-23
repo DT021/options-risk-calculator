@@ -1,6 +1,6 @@
 import React from 'react'
 import { TextField } from 'formik-material-ui'
-import WidgetTitle from '../../../components/widgets/WidgetTitle'
+import WidgetTitle from '../../../components/widgets/Widget-Title'
 import Widget from '../../../components/widgets/Widget'
 import Button from '@material-ui/core/Button'
 import { Field, Form, Formik } from 'formik'

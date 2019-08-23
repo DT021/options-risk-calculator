@@ -13,9 +13,10 @@ import Badge from '@material-ui/core/Badge'
 import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import NotificationsIcon from '@material-ui/icons/Notifications'
-import { mainListItems } from './listItems'
 import Box from '@material-ui/core/Box'
-import Copyright from './Copyright'
+import Copyright from './components/Copyright'
+import MenuItem from './components/Menu-Item'
+import LayersIcon from '@material-ui/icons/Layers'
 
 const drawerWidth = 240
 
@@ -135,7 +136,11 @@ export default function Dashboard({children}) {
           </IconButton>
         </div>
         <Divider/>
-        <List>{mainListItems}</List>
+        <List>
+          <div>
+            <MenuItem label='Options' icon={<LayersIcon/>}/>
+          </div>
+        </List>
       </Drawer>
       <main className={classes.content}>
         <div className={classes.appBarSpacer}/>

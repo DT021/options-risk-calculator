@@ -2,13 +2,13 @@ import React from 'react'
 
 import { Line } from 'react-chartjs-2'
 import Widget from '../../../components/widgets/Widget'
-import WidgetTitle from '../../../components/widgets/WidgetTitle'
+import WidgetTitle from '../../../components/widgets/Widget-Title'
 
 const calculateDataset = (orders, min, max) => ({
   labels: range(min, max),
   datasets: [
     {
-      label: 'Risk',
+      label: 'P&L',
       fill: false,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -31,6 +31,15 @@ const calculateDataset = (orders, min, max) => ({
   ]
 })
 
+const maxFromOrders = (orders) => orders.reduce((prev, curr) => prev > curr.strike ? prev : curr.strike) * 1.1
+
+const minFromOrders = (orders) => {
+  const max = orders.reduce((prev, curr) => prev > curr.strike ? prev : curr.strike, 0)
+  const min = orders.reduce((prev, curr) => prev < curr.strike ? prev : curr.strike, Number.POSITIVE_INFINITY)
+  const reduce = 0.1 * max
+  return min - reduce
+}
+
 const sum = fn => (accumulator, elem) => accumulator + fn(elem)
 
 const calculateRiskForOrders = orders => price => orders.reduce(sum(calculateRiskForOrder(price)), 0)
@@ -43,17 +52,12 @@ const calculateRiskForOrder = price => ({strike, premium, callOrPut, buyOrSell, 
   return (Math.max(breakEven, 0) - premium) * sign * quantity
 }
 
-// P&L = (MAX(breakEven, 0) - premium) * sign * quantity
-
-
-function range(start, end) {
-  return Array(end - start + 1).fill().map((_, idx) => start + idx)
-}
+const range = (start, end) => Array(end - start + 1).fill().map((_, idx) => start + idx)
 
 const RiskGraph = ({orders, xs, sm, lg, md}) => (
   <Widget xs={xs} sm={sm} lg={lg} md={md}>
     <WidgetTitle>Risk</WidgetTitle>
-    <Line data={calculateDataset(orders, 0, 210)}/>
+    <Line data={calculateDataset(orders, minFromOrders(orders), maxFromOrders(orders))}/>
   </Widget>
 )
 

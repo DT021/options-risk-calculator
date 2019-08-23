@@ -4,12 +4,11 @@ import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
-import WidgetTitle from '../../../components/widgets/WidgetTitle'
+import WidgetTitle from '../../../components/widgets/Widget-Title'
 import Widget from '../../../components/widgets/Widget'
 import IconButton from '@material-ui/core/IconButton'
 import DeleteIcon from '@material-ui/icons/Delete'
-
-const breakEven = ({strike, premium, callOrPut}) => callOrPut === 'call' ? premium + strike : strike - premium
+import { Orders } from '../../../service'
 
 const maxProfit = ({strike, premium, callOrPut, buyOrSell}) => {
   if (callOrPut === 'call' && buyOrSell === 'buy') {
@@ -65,7 +64,7 @@ const OrdersTableWidget = ({orders, xs, onDelete}) => (
             <TableCell>{row.callOrPut}</TableCell>
             <TableCell>{row.strike}</TableCell>
             <TableCell>{row.premium}</TableCell>
-            <TableCell>{breakEven(row)}</TableCell>
+            <TableCell>{Orders.breakEven(row)}</TableCell>
             <TableCell>{maxProfit(row)}</TableCell>
             <TableCell>{maxLoss(row)}</TableCell>
           </TableRow>

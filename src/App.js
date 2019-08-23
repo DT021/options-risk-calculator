@@ -1,8 +1,8 @@
 import React from 'react'
-import Dashboard from './layout/Dashboard'
+import Dashboard from './layout/dashboard/Dashboard'
 import OptionsPage from './pages/options/Options'
 import { ApolloProvider } from '@apollo/react-hooks'
-import ApolloClientProvider from './components/apollo/client-provider'
+import ApolloClientProvider from './components/apollo/Apollo-Client-Provider'
 
 const App = () => {
   return (
