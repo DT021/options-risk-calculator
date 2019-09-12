@@ -1,9 +1,5 @@
-import deleteOrder from './delete-order'
-import addOrder from './add-order'
+import * as mutations from './mutations'
 
 export default {
-  Mutation: {
-    addOrder,
-    deleteOrder
-  }
+  Mutation: mutations
 }

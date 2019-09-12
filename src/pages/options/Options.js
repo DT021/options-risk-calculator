@@ -7,10 +7,18 @@ import { makeStyles } from '@material-ui/core'
 import NewOrder from './widgets/New-Option'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
+import MaxProfit from './widgets/Max-Profit'
+import MaxLoss from './widgets/Max-Loss'
+import RiskReward from './widgets/Risk-Reward'
+import PriceWindow from './widgets/Price-Window'
 
 
 const GET_OPTIONS = gql`
   query Options {
+    priceWindow @client {
+      minimum
+      maximum
+    }
     orders @client {
       id
       buyOrSell
@@ -34,6 +42,12 @@ const DELETE_ORDER = gql`
   }
 `
 
+const SET_PRICE_WINDOW = gql`
+  mutation SetPriceWindow($minimum: Int, $maximum: Int) {
+    setPriceWindow(minimum: $minimum, maximum: $maximum) @client
+  }
+`
+
 const useStyles = makeStyles(theme => ({
   container: {
     paddingTop: theme.spacing(4),
@@ -47,6 +61,7 @@ const OptionsPage = () => {
   const {loading, error, data} = useQuery(GET_OPTIONS)
   const [addOptionOrder] = useMutation(ADD_OPTION_ORDER)
   const [deleteOrder] = useMutation(DELETE_ORDER)
+  const [setPriceWindow] = useMutation(SET_PRICE_WINDOW)
 
   if (loading) return null
   if (error) return `Error! ${error}`
@@ -54,7 +69,13 @@ const OptionsPage = () => {
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
-        <RiskGraph xs={12} orders={data.orders}/>
+        <PriceWindow xs={12} priceWindow={data.priceWindow}
+                     onNewPriceWindow={({minimum, maximum}) => setPriceWindow({variables: {minimum, maximum}})}/>
+        <MaxProfit xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
+        <MaxLoss xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
+        <RiskReward xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
+        <RiskGraph xs={12} priceWindow={data.priceWindow} orders={data.orders}/>
+        {/*<BreakEvenPoints xs={12} orders={data.orders}/>*/}
         <Orders xs={12} onDelete={({id}) => deleteOrder({variables: {id}})} orders={data.orders}/>
         <NewOrder xs={12} sm={6} onNewOrder={variables => addOptionOrder({variables})}/>
       </Grid>

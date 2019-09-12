@@ -12,14 +12,13 @@ const useStyles = makeStyles(theme => ({
   },
 }))
 
-const Widget = ({xs, md, sm, lg, children, ...rest}) => {
+const Widget = ({xs, md, sm, lg, children, paper = true}) => {
   const classes = useStyles()
 
   return (
     <Grid xs={xs} md={md} sm={sm} lg={lg} item>
-      <Paper className={classes.paper}>
-        {children}
-      </Paper>
+      {paper ? <Paper className={classes.paper}> {children} </Paper> : <div className={classes.paper}>{children}</div>}
+
     </Grid>
   )
 }
