@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 if (!Array.prototype.sliding) {
   Object.defineProperty(Array.prototype, 'sliding', {
     value: function (size) {
