@@ -12,6 +12,7 @@ import MaxLoss from './widgets/Max-Loss'
 import RiskReward from './widgets/Risk-Reward'
 import PriceWindow from './widgets/Price-Window'
 import BreakEvenPoints from './widgets/Break-Even-Points'
+import CapitalRequirements from './widgets/Capital-Requirement'
 
 
 const GET_OPTIONS = gql`
@@ -70,9 +71,10 @@ const OptionsPage = () => {
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
-        <MaxProfit xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
-        <MaxLoss xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
-        <RiskReward xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
+        <MaxProfit xs={3} priceWindow={data.priceWindow} orders={data.orders}/>
+        <MaxLoss xs={3} priceWindow={data.priceWindow} orders={data.orders}/>
+        <RiskReward xs={3} priceWindow={data.priceWindow} orders={data.orders}/>
+        <CapitalRequirements xs={3} orders={data.orders} />
         <RiskGraph xs={12} priceWindow={data.priceWindow} orders={data.orders}/>
         <PriceWindow xs={4} priceWindow={data.priceWindow}
                      onNewPriceWindow={({minimum, maximum}) => setPriceWindow({variables: {minimum, maximum}})}/>
