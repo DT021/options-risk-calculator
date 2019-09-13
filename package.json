@@ -2,6 +2,7 @@
   "name": "react-options-calculator",
   "version": "0.1.0",
   "private": true,
+  "licence": "Apache 2",
   "dependencies": {
     "@apollo/react-hooks": "^3.0.1",
     "@material-ui/core": "^4.3.2",
@@ -10,6 +11,7 @@
     "apollo-cache-inmemory": "^1.6.3",
     "apollo-cache-persist": "^0.1.1",
     "apollo-client": "^2.6.4",
+    "apollo-link-rest": "^0.7.3",
     "chart.js": "^2.8.0",
     "formik": "^1.5.8",
     "formik-material-ui": "^0.0.20",

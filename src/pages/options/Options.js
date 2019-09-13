@@ -11,6 +11,7 @@ import MaxProfit from './widgets/Max-Profit'
 import MaxLoss from './widgets/Max-Loss'
 import RiskReward from './widgets/Risk-Reward'
 import PriceWindow from './widgets/Price-Window'
+import BreakEvenPoints from './widgets/Break-Even-Points'
 
 
 const GET_OPTIONS = gql`
@@ -69,15 +70,15 @@ const OptionsPage = () => {
   return (
     <Container maxWidth="lg" className={classes.container}>
       <Grid container spacing={3}>
-        <PriceWindow xs={12} priceWindow={data.priceWindow}
-                     onNewPriceWindow={({minimum, maximum}) => setPriceWindow({variables: {minimum, maximum}})}/>
         <MaxProfit xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
         <MaxLoss xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
         <RiskReward xs={4} priceWindow={data.priceWindow} orders={data.orders}/>
         <RiskGraph xs={12} priceWindow={data.priceWindow} orders={data.orders}/>
-        {/*<BreakEvenPoints xs={12} orders={data.orders}/>*/}
+        <PriceWindow xs={4} priceWindow={data.priceWindow}
+                     onNewPriceWindow={({minimum, maximum}) => setPriceWindow({variables: {minimum, maximum}})}/>
+        <NewOrder xs={12} sm={4} onNewOrder={variables => addOptionOrder({variables})}/>
+        <BreakEvenPoints priceWindow={data.priceWindow} xs={4} orders={data.orders}/>
         <Orders xs={12} onDelete={({id}) => deleteOrder({variables: {id}})} orders={data.orders}/>
-        <NewOrder xs={12} sm={6} onNewOrder={variables => addOptionOrder({variables})}/>
       </Grid>
     </Container>
   )

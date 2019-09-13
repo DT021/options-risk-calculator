@@ -48,7 +48,7 @@ const PriceWindow = ({xs, sm, priceWindow: {minimum, maximum}, onNewPriceWindow}
                   variant="contained"
                   color='primary'
                   disabled={isSubmitting || !isValid}>
-                  Commit
+                  Save
                 </Button>
               </Grid>
             </Grid>

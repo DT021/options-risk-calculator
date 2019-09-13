@@ -18,7 +18,6 @@ const Widget = ({xs, md, sm, lg, children, paper = true}) => {
   return (
     <Grid xs={xs} md={md} sm={sm} lg={lg} item>
       {paper ? <Paper className={classes.paper}> {children} </Paper> : <div className={classes.paper}>{children}</div>}
-
     </Grid>
   )
 }

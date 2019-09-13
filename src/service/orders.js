@@ -1,3 +1,5 @@
+import { Graphs } from './index'
+
 const breakEven = ({strike, premium, callOrPut}) => callOrPut === 'call' ? premium + strike : strike - premium
 
 const breakEvens = (orders) => {
@@ -5,7 +7,7 @@ const breakEvens = (orders) => {
 
   const combine = pnls.sliding(1)
 
-  return combine.map(([a, b]) => xIntercept(a, b))
+  return combine.map(([a, b]) => Graphs.xIntercept(a, b))
 }
 
 const gradientChanges = orders => orders.map(gradientChangeAtStrike(orders))
@@ -16,8 +18,6 @@ const gradientChangeAtStrike = orders => ({strike}) => ({
 })
 
 const sum = (o1, o2) => o1 + o2
-
-const xIntercept = (a, b) => a.x - a.y * (b.x - a.x) / (b.y - a.y)
 
 const profitAndLossAtPrice = price => ({strike, premium, callOrPut, buyOrSell, quantity}) => {
   const breakEven = callOrPut === 'call' ? price - strike : strike - price

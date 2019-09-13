@@ -8,7 +8,7 @@ const MaxLoss = ({orders, priceWindow, xs, sm, lg, md}) => (
   <Widget xs={xs} sm={sm} lg={lg} md={md}>
     <WidgetTitle>Max Loss</WidgetTitle>
     <Typography>
-      {Math.min(...strikes(priceWindow, orders).map(price => orders.map(Orders.profitAndLossAtPrice(price)).reduce((o1, o2) => o1 + o2)))}
+      {Math.min(...strikes(priceWindow, orders).map(price => orders.map(Orders.profitAndLossAtPrice(price)).reduce((o1, o2) => o1 + o2, 0))) || '-'}
     </Typography>
   </Widget>
 )

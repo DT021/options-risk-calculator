@@ -1,7 +1,7 @@
 export default {
   priceWindow: {
     __typename: 'PriceWindow',
-    minimum: 100,
+    minimum: 150,
     maximum: 200
   },
   orders: [

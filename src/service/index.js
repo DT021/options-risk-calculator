@@ -1,5 +1,7 @@
 import Orders from './orders'
+import Graphs from './graphs'
 
 export {
-  Orders
+  Orders,
+  Graphs
 }

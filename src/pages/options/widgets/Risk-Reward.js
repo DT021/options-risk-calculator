@@ -5,7 +5,7 @@ import { Typography } from '@material-ui/core'
 import { Orders } from '../../../service'
 
 const RiskReward = ({orders, priceWindow, xs, sm, lg, md}) => {
-  const pnl = strikes(priceWindow, orders).map(price => orders.map(Orders.profitAndLossAtPrice(price)).reduce((o1, o2) => o1 + o2))
+  const pnl = strikes(priceWindow, orders).map(price => orders.map(Orders.profitAndLossAtPrice(price)).reduce((o1, o2) => o1 + o2, 0))
   const risk = Math.abs(Math.min(...pnl) / Math.max(...pnl))
 
   return (
