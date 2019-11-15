@@ -2,6 +2,8 @@
 
 I noticed that the world lacks a clean looking options calculator - so I decided to build one on my train in.
 
+Project can be found: https://options.igu.io/
+
 ## Done
 - [x] Basic graph at strike points
 - [x] Capital requirements
